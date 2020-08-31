@@ -15,14 +15,15 @@ public class Player : MonoBehaviour {
    // Start is called before the first frame update
 
    void Start () {
-      ball.GetComponent<Rigidbody> ().useGravity = false;	        
-   }
+      ball.GetComponent<Rigidbody> ().useGravity = false;
+      playerCamera.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
+      playerCamera.GetComponent<Rigidbody>().angularVelocity = new Vector3(0.0f, 0.0f, 0.0f);
+    }
 
     // Update is called once per frame
     void Update () {
-        
-      if (holdingBall) {
-           
+        //ballThrowingForce = 550f;
+        if (holdingBall) {           
          ball.transform.position = playerCamera.transform.position + playerCamera.transform.forward * ballDistance; 
 
           if (Input.GetMouseButtonDown(0)) {
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour {
             ball.ActivateTrail();   
             ball.GetComponent<Rigidbody> ().useGravity = true;
 	        ball.GetComponent<Rigidbody> ().AddForce (playerCamera.transform.forward * ballThrowingForce);
+
           }   
        }
       
